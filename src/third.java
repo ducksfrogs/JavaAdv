@@ -30,9 +30,34 @@ public class third {
         System.out.println("Hi " + name + ", what are you doing? ");
 
         System.out.println("What's your date? ");
-        String dateOfBirth = sc.nextLine();
-        int age = currentYear - Integer.parseInt(dateOfBirth);
-        return  "So you are " + age + " years old.";
 
+        boolean vaildDOB = false;
+        int age = 0;
+
+        do{
+            System.out.println("Enter a year of birth: " + (currentYear - 125 ) + " and <= " + currentYear);
+            try {
+                age = checkData(currentYear, sc.nextLine());
+                vaildDOB = age < 0 ? false : true;
+            } catch (NumberFormatException badUserData){
+                System.out.println("Invalid input. Try again.");
+            }
+
+//            String dateOfBirth = sc.nextLine();
+//            age = currentYear - Integer.parseInt(dateOfBirth);
+        } while (!vaildDOB);
+
+
+        return  "So you are " + age + " years old.";
+    }
+
+    public static int checkData(int currentYear, String dateOfBirth) {
+        int dob = Integer.parseInt(dateOfBirth);
+        int minimumYear = currentYear - 125;
+
+        if ((dob < minimumYear) || (dob > currentYear)) {
+            return -1;
+        }
+        return (currentYear - dob);
     }
 }
